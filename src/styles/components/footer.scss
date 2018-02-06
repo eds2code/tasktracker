@@ -1,0 +1,8 @@
+.footer {
+  padding: $layout-offset*2 0;
+  text-align: center;
+
+  p {
+    @include size(12);
+  }
+}

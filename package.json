@@ -1,0 +1,28 @@
+{
+  "name": "vnurov",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": "",
+  "license": "ISC",
+
+  "scripts": {
+    "build": "gulp build",
+    "dev": "gulp dev"
+  },
+
+  "devDependencies": {
+    "autoprefixer": "^7.1.4",
+    "browser-sync": "^2.18.13",
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^4.0.0",
+    "gulp-clean-css": "^3.9.0",
+    "gulp-cli": "*",
+    "gulp-group-css-media-queries": "^1.2.0",
+    "gulp-html-beautify": "^1.0.1",
+    "gulp-imagemin": "^3.4.0",
+    "gulp-pug": "^3.3.0",
+    "gulp-sass": "^3.1.0",
+    "smart-grid": "^1.1.0"
+  }
+}

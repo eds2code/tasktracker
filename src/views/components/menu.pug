@@ -1,0 +1,21 @@
+mixin links()
+  a(href="hotel.html").menu__item Отель
+  a(href="restaurant.html").menu__item Ресторан
+  a(href="banya.html").menu__item Баня
+  a(href="infrastructure.html").menu__item Инфраструктура
+  
+mixin links-right()  
+  a(href="news.html").menu__item Новости и акции
+  a(href="contacts.html").menu__item Контакты
+  a(href="booking.html").menu__item.button-big Забронировать
+
+nav.menu
+  .wrapper
+    i.fa.fa-close.menu__close
+    span.links__block
+      +links()
+    span.links__block.links__block-right
+      +links-right()
+      
+script(src='assets/js/mobile-menu.js')
+  
