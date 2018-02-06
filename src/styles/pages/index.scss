@@ -1,0 +1,162 @@
+.descript {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.descript-top {
+}
+
+.resume__block {
+  @include col();
+  @include size(12);
+
+  position: relative;
+  border-radius: $layout-offset/2;
+  padding: $layout-offset;
+  border: 1px solid $palette-grey-200;
+  margin-top: $layout-offset*3;
+
+  .block {
+    &__h1 {
+      position: absolute;
+      top: -12px;
+      padding: 4px;
+      background: #fff;
+      font-size: $font-size-normal;
+      font-weight: 200;
+      border-radius: 24px;
+      font-weight: 500;
+      color: $palette-grey-300;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+
+    &__items {
+      margin-top: $layout-offset/2;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+      .block__item {
+        display: flex;
+        align-items: center;
+        position: relative;
+
+        .item__h1 {
+          font-size: $font-size-medium - 6px;
+          font-weight: 500;
+        }
+
+        .item__h2 {
+          cursor: default;
+          display: block;
+          bottom: 8px;
+          position: absolute;
+          background: #fff;
+          box-shadow: 0px 0px 24px 0px rgba(#252525, .3);
+          padding: 4px;
+          border-radius: 4px;
+          font-size: $font-size-small;
+          text-transform: uppercase;
+          font-weight: 700;
+          opacity: 0;
+          color: $palette-purple-400;
+        }
+
+        &:hover {
+          .item__h2 {
+            opacity: 1;
+          }
+        }
+
+        .item__icon {
+          font-size: $font-size-large*2;
+          margin-right: $layout-offset/4;
+
+          .pug-logo {
+            width: $layout-offset*5;
+            height: $layout-offset*5;
+            background: url('/assets/img/pug-logo.svg') center center no-repeat;
+            background-size: cover;
+          }
+          .webpack-logo {
+            width: $layout-offset*4;
+            height: $layout-offset*4;
+            background: url('/assets/img/webpack-logo.svg') center center no-repeat;
+            background-size: contain;
+          }
+        }
+      }
+    }
+  }
+}
+
+.resume__text {
+  @include size(7);
+  @include size-md(12);
+  @include col();
+
+  position: relative;
+  margin-top: $layout-offset*2;
+
+  p {
+    margin: auto;
+    font-weight: 400;
+    font-size: $font-size-normal;
+    color: $palette-grey-500;
+    line-height: $font-size-normal + 8px;
+  }
+}
+
+.contact__block {
+  @include size(5);
+  @include size-md(12);
+  @include col();
+  padding-left: $layout-offset*5;
+  margin-top: $layout-offset*2;
+
+  @include md-block{
+    padding-left: 0;
+  };
+
+  .contact__item {
+    .item__h1 {
+      font-size: $font-size-normal;
+      color: $palette-grey-500;
+    }
+  }
+
+  .item__links {
+    display: flex;
+    justify-content: space-between;
+
+    .link {
+      font-size: $font-size-big;
+      text-decoration: none;
+      color: $palette-grey-500;
+
+      &-moikrug {
+        width: $font-size-big;
+        height: $font-size-big;
+        opacity: .5;
+        margin-top: 4px;
+        background: url('/assets/img/moikrug-logo.png') center center no-repeat;
+        background-size: cover;
+        border-radius: 100%;
+      }
+    }
+  }
+}
+
+.labels {
+  margin-top: $layout-offset;
+  margin-bottom: -$layout-offset;
+  @include col();
+
+  .label {
+    display: inline-block;
+  }
+}
