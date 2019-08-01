@@ -4,9 +4,7 @@ import getters from './getters';
 
 export default {
   state: {
-    tasks: [
-      ...JSON.parse(window.localStorage.tasks),
-    ],
+    tasks: window.localStorage.tasks ? JSON.parse(window.localStorage.tasks) : [],
     reportText: '',
   },
 

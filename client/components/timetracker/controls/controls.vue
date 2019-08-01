@@ -76,12 +76,18 @@ export default {
       'createReport',
     ]),
 
+    clearInputs() {
+      this.title = undefined;
+      this.durationLimit = undefined;
+    },
+
     createTask() {
       this.addTask({
         title: this.title,
         isStarted: false,
         durationLimit: this.durationLimit * ONE_HOUR,
       });
+      this.clearInputs();
     },
 
     createAndStartTask() {
@@ -90,6 +96,7 @@ export default {
         isStarted: true,
         durationLimit: this.durationLimit * ONE_HOUR,
       });
+      this.clearInputs();
     },
   },
 };
