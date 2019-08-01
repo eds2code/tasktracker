@@ -63,17 +63,19 @@ export default {
     this.updateTask({
       ...this.task,
       title: this.title,
+      isStarted: this.isStarted,
       duration: this.duration,
     });
   },
 
   data() {
     return {
+      interval: undefined,
       isTitleEditMode: false,
       title: this.task.title,
-      duration: this.task.duration,
+      isStarted: false,
+      duration: 0,
       durationLimit: this.task.durationLimit,
-      interval: undefined,
     };
   },
 
@@ -94,8 +96,6 @@ export default {
 
   methods: {
     ...mapActions([
-      'startTask',
-      'pauseTask',
       'updateTask',
       'deleteTask',
     ]),
@@ -109,14 +109,14 @@ export default {
     },
 
     pauseThisTask() {
+      this.isStarted = false;
       clearInterval(this.interval);
       this.interval = undefined;
-      this.pauseTask(this.task);
     },
 
     startThisTask() {
+      this.isStarted = true;
       this.interval = setInterval(() => { this.incrementDuration(); }, 1000);
-      this.startTask(this.task);
     },
   },
 };
