@@ -54,7 +54,7 @@ export default {
   },
 
   created() {
-    if (this.isStarted) {
+    if (this.task.isStarted) {
       this.interval = setInterval(() => { this.incrementDuration(); }, 1000);
     }
   },
@@ -73,7 +73,7 @@ export default {
       interval: undefined,
       isTitleEditMode: false,
       title: this.task.title,
-      isStarted: false,
+      isStarted: this.task.isStarted,
       duration: 0,
       durationLimit: this.task.durationLimit,
     };
