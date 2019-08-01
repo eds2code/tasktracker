@@ -2,10 +2,14 @@ import actions from './actions';
 import mutations from './mutations';
 import getters from './getters';
 
+const tasks = window.localStorage.tasks ? JSON.parse(window.localStorage.tasks) : [];
+
 export default {
   state: {
-    tasks: window.localStorage.tasks ? JSON.parse(window.localStorage.tasks) : [],
+    tasks,
     reportText: '',
+
+    startedTasks: [],
   },
 
   actions,

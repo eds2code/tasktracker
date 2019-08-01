@@ -10,7 +10,7 @@
              type="text"
              placeholder="Замечательный таск"
              v-model="title"
-             @keyup.enter="createTask"
+             @keyup.enter="createThisTask()"
       >
     </div>
     <div class="controls__control">
@@ -20,19 +20,19 @@
       <input class="controls__input controls__input_short"
              placeholder="0.5"
              v-model="durationLimit"
-             @keyup.enter="createTask"
+             @keyup.enter="createThisTask()"
       >
     </div>
     <div class="controls__buttons">
       <div class="controls__button"
            role="button"
-           @click="createTask()"
+           @click="createThisTask()"
       > 📎 Добавить</div>
       <div class="controls__button"
            role="button"
            @click="createAndStartTask()"
       > 🚀 Добавить и начать</div>
-      <div class="controls__button"
+      <div class="controls__button controls__button_ml-a"
            :class="{ 'controls__button_disabled': tasks.length === 0 }"
            role="button"
            @click="tasks.length > 0 ? createReport() : false"
@@ -72,7 +72,7 @@ export default {
 
   methods: {
     ...mapActions([
-      'addTask',
+      'createTask',
       'createReport',
     ]),
 
@@ -81,8 +81,8 @@ export default {
       this.durationLimit = undefined;
     },
 
-    createTask() {
-      this.addTask({
+    createThisTask() {
+      this.createTask({
         title: this.title,
         isStarted: false,
         durationLimit: this.durationLimit * ONE_HOUR,
@@ -91,7 +91,7 @@ export default {
     },
 
     createAndStartTask() {
-      this.addTask({
+      this.createTask({
         title: this.title,
         isStarted: true,
         durationLimit: this.durationLimit * ONE_HOUR,
@@ -142,7 +142,7 @@ export default {
   .controls__buttons {
     display: flex;
     align-items: center;
-    margin-left: auto;
+    width: 100%;
   }
 
   .controls__button {
@@ -153,6 +153,10 @@ export default {
     padding: 0 15px;
     border-radius: 3px;
     margin-left: 10px;
+  }
+
+  .controls__button_ml-a {
+    margin-left: auto;
   }
 
   .controls__button:hover {

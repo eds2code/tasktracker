@@ -3,7 +3,7 @@
 import types from './mutations_types.js';
 
 export default {
-  [types.ADD_TASK]: (state, task) => {
+  [types.CREATE_TASK]: (state, task) => {
     state.tasks.push(task);
   },
   [types.DELETE_TASK]: (state, task) => {

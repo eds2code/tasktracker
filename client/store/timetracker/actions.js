@@ -4,7 +4,7 @@ import getHhMmSsFromTimestamp from '../../helpers/get_hhmmss_from_timestamp';
 import types from './mutations_types.js';
 
 export default {
-  addTask: ({ commit }, {
+  createTask: ({ commit }, {
     title = 'Таск без названия',
     isStarted = true,
     startDateTime = new Date(),
@@ -15,7 +15,7 @@ export default {
     const task = {
       id, title, startDateTime, duration, isStarted, durationLimit,
     };
-    commit(types.ADD_TASK, task);
+    commit(types.CREATE_TASK, task);
   },
 
   deleteTask: ({ commit }, task) => {
