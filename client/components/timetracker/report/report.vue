@@ -49,7 +49,7 @@ export default {
     border: 1px solid #ffdd66;
     background: none;
     padding: 20px;
-    border-radius: 3px;
+    border-radius: 6px;
     outline: none;
   }
 </style>

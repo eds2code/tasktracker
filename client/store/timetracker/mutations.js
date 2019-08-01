@@ -10,13 +10,11 @@ export default {
     state.tasks = state.tasks.filter(_task => _task.id !== task.id);
   },
   [types.UPDATE_TASK]: (state, task) => {
-    const oldTask = state.tasks.find(_task => _task.id === task.id);
-    const taskIndex = state.tasks.findIndex(_task => _task.id === task.id);
-
-    state.tasks[taskIndex] = {
-      ...oldTask,
-      ...task,
-    };
+    const { tasks } = state;
+    const index = state.tasks.findIndex(_task => _task.id === task.id);
+    const firstHalf = tasks.slice(0, index);
+    const secondHalf = tasks.slice(index + 1, tasks.length);
+    state.tasks = [...firstHalf, task, ...secondHalf];
   },
   [types.SET_REPORT_TEXT]: (state, reportText) => {
     state.reportText = reportText;

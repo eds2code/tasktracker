@@ -2,8 +2,8 @@
   <div class="timetracker">
     <Header />
     <Controls />
-    <Report />
     <TasksList />
+    <Report />
   </div>
 </template>
 

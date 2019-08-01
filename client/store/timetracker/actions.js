@@ -6,7 +6,7 @@ import types from './mutations_types.js';
 export default {
   createTask: ({ commit }, {
     title = 'Таск без названия',
-    isStarted = true,
+    isStarted = false,
     startDateTime = new Date(),
     duration = 0,
     durationLimit = undefined,
