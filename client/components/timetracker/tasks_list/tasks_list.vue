@@ -1,8 +1,8 @@
 <template>
   <div class="tasks-list">
     <TasksListItem
-      v-for="(task, index) in tasks"
-      :key="index"
+      v-for="task in tasks"
+      :key="task.id"
       :task="task"
     />
   </div>
