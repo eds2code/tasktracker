@@ -1,7 +1,6 @@
 <template>
   <div class="task">
     <div class="task__title"
-         :class="{ 'task__title_active': isStarted }"
          @click.self="toggleTitleEditMode"
     >
       <template v-if="isTitleEditMode">
@@ -20,19 +19,18 @@
          :class="{ 'task__duration-limit_red': isDurationMoreThanLimit }"
     > {{ formattedDurationLimit }}
     </div>
-    <div class="task__duration"
-         :class="{ 'task__duration_active': isStarted }"
-    > {{ formattedDuration }}
+    <div class="task__duration">
+      {{ formattedDuration }}
     </div>
 
     <div class="task__controls">
       <div class="task__control"
            v-if="isStarted"
-           @click="pauseThisTask()"
+           @click="pauseTask(task)"
       >🏁</div>
       <div class="task__control"
            v-if="!isStarted"
-           @click="startThisTask()"
+           @click="startTask(task)"
       >🚀</div>
       <div class="task__control task__control_small"
            @click="deleteTask(task)"
@@ -54,7 +52,7 @@ export default {
   },
 
   created() {
-    if (this.task.isStarted) {
+    if (this.isStarted) {
       this.interval = setInterval(() => { this.incrementDuration(); }, 1000);
     }
   },
@@ -70,12 +68,12 @@ export default {
 
   data() {
     return {
-      interval: undefined,
       isTitleEditMode: false,
       title: this.task.title,
-      isStarted: this.task.isStarted,
-      duration: 0,
+      duration: this.task.duration,
       durationLimit: this.task.durationLimit,
+      isStarted: this.task.isStarted,
+      interval: undefined,
     };
   },
 
@@ -108,15 +106,15 @@ export default {
       this.isTitleEditMode = !this.isTitleEditMode;
     },
 
-    pauseThisTask() {
-      this.isStarted = false;
+    pauseTask() {
       clearInterval(this.interval);
       this.interval = undefined;
+      this.isStarted = false;
     },
 
-    startThisTask() {
-      this.isStarted = true;
+    startTask() {
       this.interval = setInterval(() => { this.incrementDuration(); }, 1000);
+      this.isStarted = true;
     },
   },
 };
@@ -130,20 +128,12 @@ export default {
     flex-wrap: nowrap;
     padding: 10px 15px;
     border-radius: 6px;
-    background: #f8f8f8;
+    background: #f7f7f7;
   }
 
   .task__title {
     margin-right: auto;
     line-height: 30px;
-    color: #999;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-
-  .task__title_active {
-    color: #222;
   }
 
   .task__input {
@@ -153,17 +143,12 @@ export default {
     height: 29px;
     border-radius: 3px;
     outline: none;
-    width: 230px;
+    width: 285px;
   }
 
   .task__duration {
     white-space: nowrap;
     margin-left: 20px;
-    color: #999;
-  }
-
-  .task__duration_active {
-    color: #222;
   }
 
   .task__duration-limit {
