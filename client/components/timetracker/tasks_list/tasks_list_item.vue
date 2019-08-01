@@ -1,6 +1,7 @@
 <template>
   <div class="task">
     <div class="task__title"
+         :class="{ 'task__title_active': isStarted }"
          @click.self="toggleTitleEditMode"
     >
       <template v-if="isTitleEditMode">
@@ -19,18 +20,19 @@
          :class="{ 'task__duration-limit_red': isDurationMoreThanLimit }"
     > {{ formattedDurationLimit }}
     </div>
-    <div class="task__duration">
-      {{ formattedDuration }}
+    <div class="task__duration"
+         :class="{ 'task__duration_active': isStarted }"
+    > {{ formattedDuration }}
     </div>
 
     <div class="task__controls">
       <div class="task__control"
            v-if="isStarted"
-           @click="pauseTask(task)"
+           @click="pauseThisTask()"
       >🏁</div>
       <div class="task__control"
            v-if="!isStarted"
-           @click="startTask(task)"
+           @click="startThisTask()"
       >🚀</div>
       <div class="task__control task__control_small"
            @click="deleteTask(task)"
@@ -68,12 +70,12 @@ export default {
 
   data() {
     return {
+      interval: undefined,
       isTitleEditMode: false,
       title: this.task.title,
-      duration: this.task.duration,
+      isStarted: false,
+      duration: 0,
       durationLimit: this.task.durationLimit,
-      isStarted: this.task.isStarted,
-      interval: undefined,
     };
   },
 
@@ -106,15 +108,15 @@ export default {
       this.isTitleEditMode = !this.isTitleEditMode;
     },
 
-    pauseTask() {
+    pauseThisTask() {
+      this.isStarted = false;
       clearInterval(this.interval);
       this.interval = undefined;
-      this.isStarted = false;
     },
 
-    startTask() {
-      this.interval = setInterval(() => { this.incrementDuration(); }, 1000);
+    startThisTask() {
       this.isStarted = true;
+      this.interval = setInterval(() => { this.incrementDuration(); }, 1000);
     },
   },
 };
@@ -128,12 +130,20 @@ export default {
     flex-wrap: nowrap;
     padding: 10px 15px;
     border-radius: 6px;
-    background: #f7f7f7;
+    background: #f8f8f8;
   }
 
   .task__title {
     margin-right: auto;
     line-height: 30px;
+    color: #999;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  .task__title_active {
+    color: #222;
   }
 
   .task__input {
@@ -143,12 +153,17 @@ export default {
     height: 29px;
     border-radius: 3px;
     outline: none;
-    width: 285px;
+    width: 230px;
   }
 
   .task__duration {
     white-space: nowrap;
     margin-left: 20px;
+    color: #999;
+  }
+
+  .task__duration_active {
+    color: #222;
   }
 
   .task__duration-limit {

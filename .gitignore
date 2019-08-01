@@ -1,2 +1,5 @@
 node_modules/
 .meteor/local
+
+.DS_Store
+.cache
