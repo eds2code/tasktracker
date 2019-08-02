@@ -128,9 +128,10 @@ export default {
     display: flex;
     align-items: center;
     flex-wrap: nowrap;
-    padding: 10px 15px;
+    padding: 5px 10px;
     border-radius: 6px;
     background: #f8f8f8;
+    font-size: 14px;
   }
 
   .task__title {

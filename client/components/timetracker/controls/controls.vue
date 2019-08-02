@@ -32,7 +32,7 @@
            role="button"
            @click="createAndStartTask()"
       > 🚀 Добавить и начать</div>
-      <div class="controls__button controls__button_ml-a"
+      <div class="controls__button controls__button_mr-0 controls__button_ml-a"
            :class="{ 'controls__button_disabled': tasks.length === 0 }"
            role="button"
            @click="tasks.length > 0 ? createReport() : false"
@@ -109,7 +109,6 @@ export default {
     flex-wrap: nowrap;
     padding: 20px 0px;
     border-radius: 10px;
-    margin-bottom: 10px;
     font-size: 14px;
   }
 
@@ -153,6 +152,10 @@ export default {
     padding: 0 15px;
     border-radius: 3px;
     margin-right: 10px;
+  }
+
+  .controls__button_mr-0 {
+    margin-right: 0;
   }
 
   .controls__button_ml-a {
