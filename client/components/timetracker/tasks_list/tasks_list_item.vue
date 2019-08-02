@@ -74,7 +74,7 @@ export default {
       isTitleEditMode: false,
       title: this.task.title,
       isStarted: this.task.isStarted,
-      duration: 0,
+      duration: this.task.duration,
       durationLimit: this.task.durationLimit,
     };
   },
