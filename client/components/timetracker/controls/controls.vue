@@ -152,7 +152,7 @@ export default {
     line-height: 30px;
     padding: 0 15px;
     border-radius: 3px;
-    margin-left: 10px;
+    margin-right: 10px;
   }
 
   .controls__button_ml-a {
