@@ -22,6 +22,10 @@ export default {
     commit(types.DELETE_TASK, task);
   },
 
+  resetTasks: ({ commit }) => {
+    commit(types.SET_TASKS, []);
+  },
+
   updateTask: ({ commit, dispatch }, task) => {
     commit(types.UPDATE_TASK, task);
     dispatch('saveTasks');

@@ -7,10 +7,11 @@
         Название:
       </div>
       <input class="controls__input"
+             id="inputTaskTitle"
              type="text"
              placeholder="Замечательный таск"
              v-model="title"
-             @keyup.enter="createThisTask()"
+             @keyup.enter="setFocusOnInput('inputTaskDuration')"
       >
     </div>
     <div class="controls__control">
@@ -18,6 +19,7 @@
         План (часов):
       </div>
       <input class="controls__input controls__input_short"
+             id="inputTaskDuration"
              placeholder="0.5"
              v-model="durationLimit"
              @keyup.enter="createThisTask()"
@@ -31,12 +33,17 @@
       <div class="controls__button"
            role="button"
            @click="createAndStartTask()"
-      > 🚀 Добавить и начать</div>
-      <div class="controls__button controls__button_mr-0 controls__button_ml-a"
+      > 🚀 Начать</div>
+      <div class="controls__button controls__button_ml-a"
            :class="{ 'controls__button_disabled': tasks.length === 0 }"
            role="button"
            @click="tasks.length > 0 ? createReport() : false"
       > 📝 Создать отчет</div>
+      <div class="controls__button controls__button_danger controls__button_mr-0"
+           :class="{ 'controls__button_disabled': tasks.length === 0 }"
+           role="button"
+           @click="tasks.length > 0 ? resetTasks() : false"
+      >Сбросить день</div>
     </div>
   </div>
 </template>
@@ -52,6 +59,10 @@ export default {
       title: undefined,
       durationLimit: undefined,
     };
+  },
+
+  mounted() {
+    this.setFocusOnInput('inputTaskTitle');
   },
 
   watch: {
@@ -73,12 +84,17 @@ export default {
   methods: {
     ...mapActions([
       'createTask',
+      'resetTasks',
       'createReport',
     ]),
 
     clearInputs() {
       this.title = undefined;
       this.durationLimit = undefined;
+    },
+
+    setFocusOnInput(id) {
+      document.getElementById(id).focus();
     },
 
     createThisTask() {
@@ -88,6 +104,7 @@ export default {
         durationLimit: this.durationLimit * ONE_HOUR,
       });
       this.clearInputs();
+      this.setFocusOnInput('inputTaskTitle');
     },
 
     createAndStartTask() {
@@ -152,6 +169,7 @@ export default {
     padding: 0 15px;
     border-radius: 3px;
     margin-right: 10px;
+    user-select: none;
   }
 
   .controls__button_mr-0 {
@@ -173,5 +191,11 @@ export default {
   .controls__button_disabled {
     cursor: not-allowed;
     opacity: .5;
+  }
+
+  .controls__button_danger {
+    background: none;
+    border: 1px solid #ff7675;
+    color: #ff7675;
   }
 </style>
