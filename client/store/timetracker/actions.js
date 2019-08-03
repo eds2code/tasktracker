@@ -4,6 +4,8 @@ import getHhMmSsFromTimestamp from '../../helpers/get_hhmmss_from_timestamp';
 import types from './mutations_types.js';
 
 export default {
+  approveIt: (_, text) => window.confirm(text),
+
   createTask: ({ commit }, {
     title = 'Таск без названия',
     isStarted = false,
@@ -22,8 +24,11 @@ export default {
     commit(types.DELETE_TASK, task);
   },
 
-  resetTasks: ({ commit }) => {
-    commit(types.SET_TASKS, []);
+  resetTasks: ({ commit, dispatch }) => {
+    const isApproved = dispatch('approveIt', 'Удалить все таски?');
+    if (isApproved) {
+      commit(types.SET_TASKS, []);
+    }
   },
 
   updateTask: ({ commit, dispatch }, task) => {

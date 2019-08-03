@@ -170,6 +170,7 @@ export default {
     border-radius: 3px;
     margin-right: 10px;
     user-select: none;
+    border: 1px solid #ffdd66;
   }
 
   .controls__button_mr-0 {
