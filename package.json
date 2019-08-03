@@ -4,6 +4,7 @@
   "description": "www.nurov.ru",
   "main": "index.js",
   "scripts": {
+    "dev": "meteor --port 8080",
     "start": "NO_HMR=1 meteor",
     "lint": "eslint .",
     "pretest": "npm run lint --silent"
