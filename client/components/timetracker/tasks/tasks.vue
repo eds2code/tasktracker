@@ -2,29 +2,22 @@
   <div class="tasks">
     <div class="col">
       <TasksList
-        v-if="backlogTasks.length > 0"
         :title="'План на день'"
         :tasks="backlogTasks"
         :totalDuration="backlogTasksTotalDuration"
+        :emptyMessageIcon="'💫'"
+        :emptyMessageText="'План на день пуст'"
       />
-      <TasksListEmpty
-        v-else
-        :icon="'💫'"
-        :message="'План на день пуст'"
-      />
+
     </div>
 
     <div class="col">
       <TasksList
-        v-if="startedTasks.length > 0"
         :title="'В процессе'"
         :tasks="startedTasks"
         :totalDuration="startedTasksTotalDuration"
-      />
-      <TasksListEmpty
-        v-else
-        :icon="'😴'"
-        :message="'Нет тасков в процессе'"
+        :emptyMessageIcon="'😴'"
+        :emptyMessageText="'Нет тасков в процессе'"
       />
     </div>
   </div>
@@ -33,11 +26,10 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 
-import TasksList from './tasks_list';
-import TasksListEmpty from './tasks_list_empty';
+import TasksList from './tasks_list/list';
 
 export default {
-  components: { TasksList, TasksListEmpty },
+  components: { TasksList },
 
   updated() { this.saveTasks(); },
 
