@@ -81,9 +81,6 @@ export default {
     margin-left: 5px;
     margin-right: 5px;
     margin-bottom: 10px;
-    padding: 20px;
-    border-radius: 6px;
-    border: 1px solid #ffdd66;
   }
 
   .col_12 {

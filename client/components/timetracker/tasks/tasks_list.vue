@@ -44,6 +44,12 @@ export default {
 </script>
 
 <style scoped>
+  .tasks-list {
+    padding: 20px;
+    border-radius: 6px;
+    border: 1px solid #ffdd66;
+  }
+
   .tasks-list__head {
     display: flex;
     align-items: center;

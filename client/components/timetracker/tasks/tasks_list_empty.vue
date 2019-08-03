@@ -33,11 +33,13 @@ export default {
     cursor: default;
     user-select: none;
     padding: 20px 0;
+    border-radius: 6px;
+    border: 1px solid #eee;
   }
 
   .empty span {
     font-size: 40px;
     opacity: .5;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
   }
 </style>
