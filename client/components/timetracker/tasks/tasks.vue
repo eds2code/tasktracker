@@ -4,6 +4,7 @@
       <TasksList
         v-if="backlogTasks.length > 0"
         :tasks="backlogTasks"
+        :totalDuration="backlogTasksTotalDuration"
       />
       <TasksListEmpty
         v-else
@@ -16,6 +17,7 @@
       <TasksList
         v-if="startedTasks.length > 0"
         :tasks="startedTasks"
+        :totalDuration="startedTasksTotalDuration"
       />
       <TasksListEmpty
         v-else
@@ -43,7 +45,18 @@ export default {
     ]),
 
     backlogTasks() { return this.tasks.filter(task => !task.isStarted && task.duration === 0); },
+    backlogTasksTotalDuration() {
+      let totalTime = 0;
+      this.backlogTasks.forEach((task) => { totalTime += task.durationLimit || 0; });
+      return totalTime;
+    },
+
     startedTasks() { return this.tasks.filter(task => task.isStarted || task.duration !== 0); },
+    startedTasksTotalDuration() {
+      let totalTime = 0;
+      this.startedTasks.forEach((task) => { totalTime += task.duration; });
+      return totalTime;
+    },
   },
 
   methods: {

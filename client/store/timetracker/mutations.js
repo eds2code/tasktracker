@@ -14,6 +14,7 @@ export default {
     const index = state.tasks.findIndex(_task => _task.id === task.id);
     const firstHalf = tasks.slice(0, index);
     const secondHalf = tasks.slice(index + 1, tasks.length);
+    state.tasks = [];
     state.tasks = [...firstHalf, task, ...secondHalf];
   },
   [types.SET_REPORT_TEXT]: (state, reportText) => {
