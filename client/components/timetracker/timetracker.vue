@@ -2,7 +2,7 @@
   <div class="timetracker">
     <Header />
     <Controls />
-    <TasksList />
+    <Tasks />
     <Report />
   </div>
 </template>
@@ -10,12 +10,12 @@
 <script>
 import Header from './timetracker_header';
 import Controls from './controls/controls';
-import TasksList from './tasks_list/tasks_list';
+import Tasks from './tasks/tasks';
 import Report from './report/report';
 
 export default {
   components: {
-    Controls, TasksList, Report, Header,
+    Controls, Tasks, Report, Header,
   },
 };
 </script>
