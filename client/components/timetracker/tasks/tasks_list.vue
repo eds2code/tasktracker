@@ -1,10 +1,8 @@
 <template>
   <div class="tasks-list">
     <div class="tasks-list__head">
-      <div class="tasks-list__title">План на день</div>
-      <div class="tasks-list__duration">
-        {{ formattedTotalDuration }}
-      </div>
+      <div class="tasks-list__title">{{ title }}</div>
+      <div class="tasks-list__duration">{{ formattedTotalDuration }}</div>
     </div>
     <TasksListItem
       v-for="task in tasks"
@@ -21,6 +19,10 @@ import TasksListItem from './tasks_list_item';
 
 export default {
   props: {
+    title: {
+      type: String,
+      required: true,
+    },
     tasks: {
       type: Array,
       required: true,

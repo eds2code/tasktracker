@@ -3,6 +3,7 @@
     <div class="col">
       <TasksList
         v-if="backlogTasks.length > 0"
+        :title="'План на день'"
         :tasks="backlogTasks"
         :totalDuration="backlogTasksTotalDuration"
       />
@@ -16,6 +17,7 @@
     <div class="col">
       <TasksList
         v-if="startedTasks.length > 0"
+        :title="'В процессе'"
         :tasks="startedTasks"
         :totalDuration="startedTasksTotalDuration"
       />
