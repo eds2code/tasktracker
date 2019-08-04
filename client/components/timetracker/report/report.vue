@@ -43,6 +43,7 @@ export default {
     position: relative;
     margin-bottom: 30px;
   }
+
   .report__textarea {
     width: 100%;
     height: 200px;
@@ -51,5 +52,11 @@ export default {
     padding: 20px;
     border-radius: 6px;
     outline: none;
+  }
+
+  @media screen and (max-width: 767px) {
+    .report__textarea {
+      padding-top: 60px;
+    }
   }
 </style>

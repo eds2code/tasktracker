@@ -59,12 +59,27 @@ export default {
     align-items: center;
   }
 
+  @media screen and (max-width: 767px) {
+    .report-controls {
+      right: 0;
+      top: 15px;
+      left: 15px;
+    }
+  }
+
   .report-controls__button {
     cursor: pointer;
     margin-left: 10px;
     background: #ffdd66;
     border-radius: 3px;
     padding: 5px 10px;
+  }
+
+  @media screen and (max-width: 767px) {
+    .report-controls__button {
+      margin-left: 0;
+      margin-right: 5px;
+    }
   }
 
   .report-controls__button:hover {

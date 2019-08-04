@@ -68,11 +68,25 @@ export default {
     margin: 0 -5px;
   }
 
+  @media screen and (max-width: 767px) {
+    .tasks {
+      margin: 0;
+    }
+  }
+
   .col {
     width: calc(50% - 10px);
     margin-left: 5px;
     margin-right: 5px;
     margin-bottom: 10px;
+  }
+
+  @media screen and (max-width: 767px) {
+    .col {
+      width: 100%;
+      margin-left: 0;
+      margin-right: 0;
+    }
   }
 
   .col_12 {

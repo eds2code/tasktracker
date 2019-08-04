@@ -25,6 +25,5 @@ export default {
     margin-left: auto;
     margin-right: auto;
     max-width: 960px;
-    min-width: 960px;
   }
 </style>

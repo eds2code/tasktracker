@@ -127,7 +127,7 @@ export default {
     margin-bottom: 10px;
     display: flex;
     align-items: center;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     padding: 5px 10px;
     border-radius: 6px;
     background: #f8f8f8;
@@ -181,6 +181,13 @@ export default {
     display: flex;
     align-items: center;
     margin-left: 30px;
+  }
+
+  @media screen and (max-width: 767px) {
+    .task__controls {
+      margin-left: auto;
+      margin-top: 10px;
+    }
   }
 
   .task__control {

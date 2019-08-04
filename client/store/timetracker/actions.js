@@ -4,7 +4,7 @@ import getHhMmSsFromTimestamp from '../../helpers/get_hhmmss_from_timestamp';
 import types from './mutations_types.js';
 
 export default {
-  approveIt: (_, text) => window.confirm(text),
+  createConfirm: (_, text) => window.confirm(text),
 
   createTask: ({ commit }, {
     title = 'Таск без названия',
@@ -25,7 +25,7 @@ export default {
   },
 
   resetTasks: ({ commit, dispatch }) => {
-    const isApproved = dispatch('approveIt', 'Удалить все таски?');
+    const isApproved = dispatch('createConfirm', 'Удалить все таски?');
     if (isApproved) {
       commit(types.SET_TASKS, []);
     }

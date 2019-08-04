@@ -77,6 +77,7 @@ export default {
     border-radius: 6px;
     border: 1px solid #ffdd66;
   }
+
   .tasks-list_empty {
     border: 1px solid #eee;
   }

@@ -15,6 +15,7 @@ export default {
 <style>
   * {
     box-sizing: border-box;
+    transition: all .2s;
   }
 
   #app {

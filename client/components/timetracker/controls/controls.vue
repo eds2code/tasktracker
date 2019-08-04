@@ -1,45 +1,48 @@
-<!-- TODO: Разбить на компоненты -->
+<!-- TODO: Если добавятся элементы - ! Разбить на компоненты -->
 
 <template>
   <div class="controls">
-    <div class="controls__control">
-      <div class="controls__label">
-        Название:
+    <div class="controls__inputs">
+      <div class="controls__input-block">
+        <div class="controls__label">
+          Название:
+        </div>
+        <input class="controls__input"
+               id="inputTaskTitle"
+               type="text"
+               placeholder="Замечательный таск"
+               v-model="title"
+               @keyup.enter="setFocusOnInput('inputTaskDuration')"
+        >
       </div>
-      <input class="controls__input"
-             id="inputTaskTitle"
-             type="text"
-             placeholder="Замечательный таск"
-             v-model="title"
-             @keyup.enter="setFocusOnInput('inputTaskDuration')"
-      >
-    </div>
-    <div class="controls__control">
-      <div class="controls__label">
-        План (часов):
+      <div class="controls__input-block">
+        <div class="controls__label">
+          План (часов):
+        </div>
+        <input class="controls__input controls__input_short"
+               id="inputTaskDuration"
+               placeholder="0.5"
+               v-model="durationLimit"
+               @keyup.enter="createThisTask()"
+        >
       </div>
-      <input class="controls__input controls__input_short"
-             id="inputTaskDuration"
-             placeholder="0.5"
-             v-model="durationLimit"
-             @keyup.enter="createThisTask()"
-      >
     </div>
+
     <div class="controls__buttons">
       <div class="controls__button"
            role="button"
            @click="createThisTask()"
       > 📎 Добавить</div>
-      <div class="controls__button"
+      <div class="controls__button controls__button_mr-a"
            role="button"
            @click="createAndStartTask()"
       > 🚀 Начать</div>
-      <div class="controls__button controls__button_ml-a"
+      <div class="controls__button"
            :class="{ 'controls__button_disabled': tasks.length === 0 }"
            role="button"
            @click="tasks.length > 0 ? createReport() : false"
       > 📝 Создать отчет</div>
-      <div class="controls__button controls__button_danger controls__button_mr-0"
+      <div class="controls__button controls__button_danger"
            :class="{ 'controls__button_disabled': tasks.length === 0 }"
            role="button"
            @click="tasks.length > 0 ? resetTasks() : false"
@@ -123,16 +126,36 @@ export default {
   .controls {
     display: flex;
     align-items: flex-end;
-    flex-wrap: nowrap;
     padding: 20px 0px;
     border-radius: 10px;
     font-size: 14px;
   }
 
-  .controls__control {
+  @media screen and (max-width: 767px) {
+    .controls {
+      flex-direction: column;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+  }
+
+  .controls__inputs {
+    display: flex;
+    margin: -5px;
+    margin-right: 10px;
+  }
+
+  @media screen and (max-width: 767px) {
+    .controls__inputs {
+      width: 100%;
+    }
+  }
+
+  .controls__input-block {
     display: flex;
     flex-direction: column;
-    margin-right: 10px;
+    margin: 5px;
   }
 
   .controls__label {
@@ -151,14 +174,32 @@ export default {
     width: 300px;
   }
 
+  @media screen and (max-width: 767px) {
+    .controls__input {
+      width: 100%;
+    }
+  }
+
+  .controls__input:focus {
+    box-shadow: 0px 0px 12px 0px #ffdd66;
+  }
+
   .controls__input_short {
     width: 100px;
   }
 
   .controls__buttons {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     width: 100%;
+    margin: -5px;
+  }
+
+  @media screen and (max-width: 767px) {
+    .controls__buttons {
+      margin-top: 20px;
+    }
   }
 
   .controls__button {
@@ -168,13 +209,17 @@ export default {
     line-height: 30px;
     padding: 0 15px;
     border-radius: 3px;
-    margin-right: 10px;
     user-select: none;
     border: 1px solid #ffdd66;
+    margin: 5px;
   }
 
   .controls__button_mr-0 {
     margin-right: 0;
+  }
+
+  .controls__button_mr-a {
+    margin-right: auto;
   }
 
   .controls__button_ml-a {
