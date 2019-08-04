@@ -34,7 +34,7 @@ import TasksList from './tasks_list/list';
 export default {
   components: { TasksControls, TasksList },
 
-  updated() { this.saveTasks(); },
+  created() { this.getTasks(); },
 
   computed: {
     ...mapGetters([
@@ -58,7 +58,7 @@ export default {
 
   methods: {
     ...mapActions([
-      'saveTasks',
+      'getTasks',
     ]),
   },
 };

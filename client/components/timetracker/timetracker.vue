@@ -26,6 +26,7 @@ export default {
     Tasks, Report,
   },
 
+
   computed: {
     ...mapGetters([
       'currentUser',

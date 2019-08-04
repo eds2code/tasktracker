@@ -10,11 +10,11 @@ export default {
     state.tasks.push(task);
   },
   [types.DELETE_TASK]: (state, task) => {
-    state.tasks = state.tasks.filter(_task => _task.id !== task.id);
+    state.tasks = state.tasks.filter(_task => _task._id !== task._id);
   },
   [types.UPDATE_TASK]: (state, task) => {
     const { tasks } = state;
-    const index = state.tasks.findIndex(_task => _task.id === task.id);
+    const index = state.tasks.findIndex(_task => _task._id === task._id);
     const firstHalf = tasks.slice(0, index);
     const secondHalf = tasks.slice(index + 1, tasks.length);
     state.tasks = [...firstHalf, task, ...secondHalf];

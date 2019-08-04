@@ -6,7 +6,8 @@
   "rules": {
       "import/extensions": "off",
       "import/no-unresolved": "off",
-      "no-new": "off"
+      "no-new": "off",
+      "no-underscore-dangle": "off"
   },
   "env": {
       "browser": true,

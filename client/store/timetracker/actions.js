@@ -1,10 +1,21 @@
 /* eslint no-param-reassign: "error" */
+import { Random } from 'meteor/random';
+import Tasks from '../../../imports/api/tasks.js';
 
 import getHhMmSsFromTimestamp from '../../helpers/get_hhmmss_from_timestamp';
 import types from './mutations_types.js';
 
 export default {
-  createConfirm: (_, text) => window.confirm(text),
+  getTasks: ({ commit }) => {
+    Meteor.subscribe('tasks', () => {
+      const currentUserTasks = Tasks
+        .find({ userId: Meteor.userId() })
+        .fetch();
+
+      console.log(currentUserTasks);
+      commit(types.SET_TASKS, currentUserTasks);
+    });
+  },
 
   createTask: ({ commit }, {
     title = 'Таск без названия',
@@ -13,27 +24,56 @@ export default {
     duration = 0,
     durationLimit = undefined,
   }) => {
-    const id = Number(String(Math.random()).substr(2));
     const task = {
-      id, title, startDateTime, duration, isStarted, durationLimit,
+      _id: Random.id(),
+      title,
+      startDateTime: String(startDateTime),
+      duration,
+      isStarted,
+      durationLimit,
     };
+
     commit(types.CREATE_TASK, task);
+
+    Meteor.call('tasks.create', task, (err) => {
+      if (err) {
+        window.console.log(err);
+        commit(types.DELETE_TASK, task);
+      }
+    });
   },
 
   deleteTask: ({ commit }, task) => {
     commit(types.DELETE_TASK, task);
+
+    Meteor.call('tasks.delete', task, (err) => {
+      if (err) {
+        window.console.log(err);
+        commit(types.CREATE_TASK, task);
+      }
+    });
   },
 
-  resetTasks: ({ commit, dispatch }) => {
+  updateTask: ({ commit }, task) => {
+    commit(types.UPDATE_TASK, task);
+
+    Meteor.call('tasks.update', task, (err) => {
+      if (err) {
+        window.console.log(err);
+        commit(types.UPDATE_TASK, task);
+      }
+    });
+  },
+
+  createConfirm: (_, text) => window.confirm(text),
+
+  resetTasks: ({ getters, dispatch }) => {
     const isApproved = dispatch('createConfirm', 'Удалить все таски?');
     if (isApproved) {
-      commit(types.SET_TASKS, []);
+      getters.tasks.forEach((task) => {
+        dispatch('deleteTask', task);
+      });
     }
-  },
-
-  updateTask: ({ commit, dispatch }, task) => {
-    commit(types.UPDATE_TASK, task);
-    dispatch('saveTasks');
   },
 
   createReport: ({ state, commit }) => {
@@ -61,9 +101,5 @@ export default {
 
   resetReport: ({ commit }) => {
     commit(types.SET_REPORT_TEXT, '');
-  },
-
-  saveTasks: ({ state }) => {
-    window.localStorage.setItem('tasks', JSON.stringify(state.tasks));
   },
 };

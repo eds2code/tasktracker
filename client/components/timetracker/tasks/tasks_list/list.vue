@@ -15,7 +15,7 @@
       </div>
       <ListItem
         v-for="task in tasks"
-        :key="`Started + ${task.id}`"
+        :key="`Started + ${task._id}`"
         :task="task"
       />
     </template>
