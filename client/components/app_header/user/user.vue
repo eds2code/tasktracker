@@ -2,7 +2,7 @@
   <div class="user">
     <UserStub v-if="isUserLoading" />
     <template v-else-if="currentUser">
-      {{ currentUser.profile.firstname }}
+      {{ currentUser.profile.firstname || currentUser.username }}
       <UserMenu />
     </template>
     <UserAuth v-else />

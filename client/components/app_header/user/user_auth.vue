@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="buttons">
     <div class="button"
-         @click="toggleModal('modals_login')"
+         @click="toggleModal('modals_signin')"
     > Войти </div>
     <div class="or">или</div>
     <div class="button button_yellow"

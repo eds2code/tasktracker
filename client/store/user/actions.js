@@ -13,9 +13,7 @@ export default {
       const meteorUser = Meteor.users.findOne(state.currentUserId);
       if (meteorUser) { commit(types.SET_CURRENT_USER, meteorUser); }
 
-      setTimeout(() => {
-        commit(types.DECREMENT_USER_REQUESTS_COUNTER);
-      }, 1000);
+      commit(types.DECREMENT_USER_REQUESTS_COUNTER);
     });
   },
 
@@ -28,18 +26,16 @@ export default {
   }) => {
     commit(types.INCREMENT_USER_REQUESTS_COUNTER);
 
-    setTimeout(() => {
-      Accounts.createUser(user, (err) => {
-        if (err) {
-          commit(types.SET_CURRENT_ERROR, err.reason);
-        } else {
-          commit(types.SET_CURRENT_ERROR, '');
-          dispatch('login', user);
-        }
+    Accounts.createUser(user, (err) => {
+      if (err) {
+        commit(types.SET_CURRENT_ERROR, err.reason);
+      } else {
+        commit(types.SET_CURRENT_ERROR, '');
+        dispatch('login', user);
+      }
 
-        commit(types.DECREMENT_USER_REQUESTS_COUNTER);
-      });
-    }, 500);
+      commit(types.DECREMENT_USER_REQUESTS_COUNTER);
+    });
   },
 
   login: ({ commit }, user = {
@@ -48,19 +44,17 @@ export default {
   }) => {
     commit(types.INCREMENT_USER_REQUESTS_COUNTER);
 
-    setTimeout(() => {
-      Meteor.loginWithPassword(user.username, user.password, (err) => {
-        if (err) {
-          commit(types.SET_CURRENT_ERROR, err.reason);
-        } else {
-          commit(types.SET_CURRENT_ERROR, '');
-          commit(types.SET_CURRENT_USER, Meteor.user());
-          commit(globalTypes.SET_CURRENT_MODAL_COMPONENT_NAME, '', { root: true });
-        }
+    Meteor.loginWithPassword(user.username, user.password, (err) => {
+      if (err) {
+        commit(types.SET_CURRENT_ERROR, err.reason);
+      } else {
+        commit(types.SET_CURRENT_ERROR, '');
+        commit(types.SET_CURRENT_USER, Meteor.user());
+        commit(globalTypes.SET_CURRENT_MODAL_COMPONENT_NAME, '', { root: true });
+      }
 
-        commit(types.DECREMENT_USER_REQUESTS_COUNTER);
-      });
-    }, 500);
+      commit(types.DECREMENT_USER_REQUESTS_COUNTER);
+    });
   },
 
   logout: ({ commit }) => {

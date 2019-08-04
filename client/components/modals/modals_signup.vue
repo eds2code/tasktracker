@@ -1,26 +1,29 @@
 <template lang="html">
   <div>
-    <label for="firstname">Имя:</label>
-    <input id="firstname"
+    <label for="inputFirstname">Имя:</label>
+    <input id="inputFirstname"
            type="text"
            name="firstname"
            v-model="firstname"
+           @keyup.enter="setFocusOnInput('#inputUsername');"
     >
 
-    <label for="login">Логин:</label>
-    <input id="login"
+    <label for="inputUsername">Логин:</label>
+    <input id="inputUsername"
            type="text"
-           name="login"
+           name="username"
            v-model="username"
+           @keyup.enter="setFocusOnInput('#inputPassword');"
            required
     >
 
-    <label for="password">Пароль:</label>
-    <input id="password"
+    <label for="inputPassword">Пароль:</label>
+    <input id="inputPassword"
            type="password"
            name="password"
            v-model="password"
            required
+           @keyup.enter="signUp()"
     >
 
     <Loader v-if="isUserLoading" />
@@ -36,6 +39,10 @@ import Loader from '../loader';
 export default {
   components: {
     Loader,
+  },
+
+  mounted() {
+    this.setFocusOnInput('#inputFirstname');
   },
 
   data() {
@@ -65,6 +72,10 @@ export default {
           firstname: this.firstname,
         },
       });
+    },
+
+    setFocusOnInput(id) {
+      document.querySelector(id).focus();
     },
   },
 };

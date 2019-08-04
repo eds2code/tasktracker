@@ -21,10 +21,10 @@
 import Vue from 'vue';
 import { mapActions, mapGetters } from 'vuex';
 
-import ModalsLogin from './modals_login.vue';
+import ModalsSignin from './modals_signin.vue';
 import Modalssignup from './modals_signup.vue';
 
-Vue.component('modals_login', ModalsLogin);
+Vue.component('modals_signin', ModalsSignin);
 Vue.component('modals_signup', Modalssignup);
 
 export default {
