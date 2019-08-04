@@ -1,0 +1,120 @@
+<template lang="html">
+  <div>
+    <label for="firstname">Имя:</label>
+    <input id="firstname"
+           type="text"
+           name="firstname"
+           v-model="firstname"
+    >
+
+    <label for="login">Логин:</label>
+    <input id="login"
+           type="text"
+           name="login"
+           v-model="username"
+           required
+    >
+
+    <label for="password">Пароль:</label>
+    <input id="password"
+           type="password"
+           name="password"
+           v-model="password"
+           required
+    >
+
+    <Loader v-if="isUserLoading" />
+    <button v-else @click="signUp()"> Создать аккаунт </button>
+  </div>
+</template>
+
+<script>
+import { mapGetters, mapActions } from 'vuex';
+
+import Loader from '../loader';
+
+export default {
+  components: {
+    Loader,
+  },
+
+  data() {
+    return {
+      firstname: '',
+      username: '',
+      password: '',
+    };
+  },
+
+  computed: {
+    ...mapGetters([
+      'isUserLoading',
+    ]),
+  },
+
+  methods: {
+    ...mapActions([
+      'createUser',
+    ]),
+
+    signUp() {
+      this.createUser({
+        username: this.username,
+        password: this.password,
+        profile: {
+          firstname: this.firstname,
+        },
+      });
+    },
+  },
+};
+</script>
+
+<style lang="css" scoped>
+  label {
+    font-size: 14px;
+    color: #222;
+    margin-bottom: 5px;
+  }
+
+  input {
+    border: 1px solid #ffdd66;
+    background: none;
+    padding: 0 10px;
+    height: 30px;
+    border-radius: 3px;
+    outline: none;
+    width: 200px;
+    margin-bottom: 20px;
+    font-size: 14px;
+  }
+
+  @media screen and (max-width: 767px) {
+    input {
+      width: 100%;
+    }
+  }
+
+  input:focus {
+    box-shadow: 0px 0px 12px 0px #ffdd66;
+  }
+
+  button {
+    background: #ffdd66;
+    padding: 0 30px;
+    height: 30px;
+    border: 0;
+    outline: none;
+    border-radius: 3px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  button:hover {
+    opacity: .5;
+  }
+
+  button:active {
+    transform: scale(.95);
+  }
+</style>

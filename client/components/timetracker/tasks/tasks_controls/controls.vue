@@ -129,6 +129,7 @@ export default {
     padding: 20px 0px;
     border-radius: 10px;
     font-size: 14px;
+    width: 100%;
   }
 
   @media screen and (max-width: 767px) {

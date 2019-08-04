@@ -1,24 +1,26 @@
 <template>
   <div class="tasks">
-    <div class="col">
-      <TasksList
-        :title="'План на день'"
-        :tasks="backlogTasks"
-        :totalDuration="backlogTasksTotalDuration"
-        :emptyMessageIcon="'💫'"
-        :emptyMessageText="'План на день пуст'"
-      />
+    <TasksControls />
 
-    </div>
-
-    <div class="col">
-      <TasksList
-        :title="'В процессе'"
-        :tasks="startedTasks"
-        :totalDuration="startedTasksTotalDuration"
-        :emptyMessageIcon="'😴'"
-        :emptyMessageText="'Нет тасков в процессе'"
-      />
+    <div class="row">
+      <div class="col-md-12 col-lg-6 mb-30">
+        <TasksList
+          :title="'План на день'"
+          :tasks="backlogTasks"
+          :totalDuration="backlogTasksTotalDuration"
+          :emptyMessageIcon="'💫'"
+          :emptyMessageText="'План на день пуст'"
+        />
+      </div>
+      <div class="col-md-12 col-lg-6 mb-30">
+        <TasksList
+          :title="'В процессе'"
+          :tasks="startedTasks"
+          :totalDuration="startedTasksTotalDuration"
+          :emptyMessageIcon="'😴'"
+          :emptyMessageText="'Нет тасков в процессе'"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -26,10 +28,11 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 
+import TasksControls from './tasks_controls/controls';
 import TasksList from './tasks_list/list';
 
 export default {
-  components: { TasksList },
+  components: { TasksControls, TasksList },
 
   updated() { this.saveTasks(); },
 
@@ -61,38 +64,8 @@ export default {
 };
 </script>
 
-<style scoped>
-  .tasks {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 -5px;
-  }
-
-  @media screen and (max-width: 767px) {
-    .tasks {
-      margin: 0;
-    }
-  }
-
-  .col {
-    width: calc(50% - 10px);
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-bottom: 10px;
-  }
-
-  @media screen and (max-width: 767px) {
-    .col {
-      width: 100%;
-      margin-left: 0;
-      margin-right: 0;
-    }
-  }
-
-  .col_12 {
-    width: calc(100% - 10px);
-    padding: 20px;
-    border-radius: 6px;
-    border: 1px solid #ffdd66;
+<style>
+  .mb-30 {
+    margin-bottom: 30px;
   }
 </style>

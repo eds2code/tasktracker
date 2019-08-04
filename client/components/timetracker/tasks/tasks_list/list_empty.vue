@@ -37,6 +37,6 @@ export default {
   .empty span {
     font-size: 40px;
     opacity: .5;
-    margin-bottom: 15px;
+    margin-bottom: 21px;
   }
 </style>
