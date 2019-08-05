@@ -127,7 +127,7 @@ export default {
     margin-bottom: 10px;
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     padding: 5px 10px;
     border-radius: 6px;
     background: #f8f8f8;
