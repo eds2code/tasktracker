@@ -76,12 +76,12 @@ export default {
     }
   },
 
-  createReport: ({ state, commit }) => {
+  createReport: ({ getters, commit }) => {
     commit(types.SET_REPORT_TEXT, '');
 
     let reportText = '';
 
-    state.tasks.forEach((task) => {
+    getters.tasks.forEach((task) => {
       const formattedDuration = getHhMmSsFromTimestamp(task.duration);
       const formattedDurationLimit = getHhMmSsFromTimestamp(task.durationLimit);
 
