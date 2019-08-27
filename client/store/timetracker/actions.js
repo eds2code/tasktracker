@@ -12,7 +12,7 @@ export default {
         .find({ userId: Meteor.userId() })
         .fetch();
 
-      console.log(currentUserTasks);
+      window.console.log(currentUserTasks);
       commit(types.SET_TASKS, currentUserTasks);
     });
   },
@@ -65,6 +65,7 @@ export default {
     });
   },
 
+  // eslint-disable-next-line no-alert
   createConfirm: (_, text) => window.confirm(text),
 
   resetTasks: ({ getters, dispatch }) => {
@@ -86,14 +87,17 @@ export default {
       const formattedDurationLimit = getHhMmSsFromTimestamp(task.durationLimit);
 
       let emoji = '';
-
-      if (task.duration > 0 && task.durationLimit > 0) {
-        emoji = task.duration <= task.durationLimit ? '✅ ' : '❌ ';
-      } else {
-        emoji = '☝️';
+      if (task.duration > 0) {
+        if (task.durationLimit > 0) {
+          emoji = task.duration <= task.durationLimit ? '✅ ' : '❌ ';
+        } else {
+          emoji = '☝️';
+        }
       }
 
-      reportText += `- ${task.title} [${emoji}${formattedDuration} / ${formattedDurationLimit || formattedDuration}] \r\n`;
+      const timePlan = `[План: ${formattedDurationLimit}]`;
+      const timeFact = `[${emoji}${formattedDuration} / ${task.durationLimit > 0 ? formattedDurationLimit : '--:--:--'}]`;
+      reportText += `- ${task.title} \`${task.duration > 0 ? timeFact : timePlan}\` \r\n`;
     });
 
     commit(types.SET_REPORT_TEXT, reportText);
