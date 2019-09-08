@@ -202,6 +202,13 @@ export default {
     align-items: center;
     flex-wrap: nowrap;
     margin: -5px;
+    margin-left: 5px;
+  }
+
+  @media screen and (max-width: 767px) {
+    .task__duration-block {
+      margin-left: -5px;
+    }
   }
 
   .task__duration {
