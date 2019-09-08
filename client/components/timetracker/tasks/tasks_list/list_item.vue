@@ -1,5 +1,7 @@
 <template>
-  <div class="task">
+  <div class="task"
+       v-click-outside="disableTitleEditMode"
+  >
     <div class="task__title"
          :class="{ 'task__title_active': isStarted }"
          @click.self="toggleTitleEditMode"
@@ -8,21 +10,24 @@
         <input type="text"
                class="task__input"
                v-model="title"
-               @keyup.enter="toggleTitleEditMode"
+               @keyup.enter="disableTitleEditMode"
         >
       </template>
       <template v-else>
         {{ title }}
       </template>
     </div>
-    <div class="task__duration-limit"
-         v-if="formattedDurationLimit"
-         :class="{ 'task__duration-limit_red': isDurationMoreThanLimit }"
-    > {{ formattedDurationLimit }}
-    </div>
-    <div class="task__duration"
-         :class="{ 'task__duration_active': isStarted }"
-    > {{ formattedDuration }}
+
+    <div class="task__duration-block">
+      <div class="task__duration task__duration_limit"
+          v-if="formattedDurationLimit"
+          :class="{ 'task__duration-limit_red': isDurationMoreThanLimit }"
+      > {{ formattedDurationLimit }}
+      </div>
+      <div class="task__duration"
+          :class="{ 'task__duration_active': isStarted }"
+      > {{ formattedDuration }}
+      </div>
     </div>
 
     <div class="task__controls">
@@ -42,6 +47,7 @@
 </template>
 
 <script>
+import ClickOutside from 'vue-click-outside';
 import { mapActions } from 'vuex';
 import getHhMmSsFromTimestamp from '../../../../helpers/get_hhmmss_from_timestamp';
 
@@ -53,10 +59,16 @@ export default {
     },
   },
 
+  directives: { ClickOutside },
+
   created() {
     if (this.task.isStarted) {
       this.interval = setInterval(() => { this.incrementDuration(); }, 1000);
     }
+  },
+
+  mounted() {
+    this.taskNode = this.$el;
   },
 
   updated() {
@@ -104,8 +116,22 @@ export default {
       this.duration += 1000;
     },
 
-    toggleTitleEditMode() {
-      this.isTitleEditMode = !this.isTitleEditMode;
+    toggleTitleEditMode(boolean) {
+      if (typeof boolean === 'undefined') {
+        this.isTitleEditMode = !this.isTitleEditMode;
+      } else {
+        this.isTitleEditMode = boolean;
+      }
+
+      if (this.isTitleEditMode) {
+        this.$nextTick(() => {
+          this.$el.querySelector('.task__input').focus();
+        });
+      }
+    },
+
+    disableTitleEditMode() {
+      this.isTitleEditMode = false;
     },
 
     pauseThisTask() {
@@ -132,15 +158,24 @@ export default {
     border-radius: 6px;
     background: #f8f8f8;
     font-size: 14px;
+    line-height: 30px;
+  }
+
+  @media screen and (max-width: 767px) {
+    .task {
+      flex-wrap: wrap;
+    }
   }
 
   .task__title {
     margin-right: auto;
+    height: 30px;
     line-height: 30px;
     color: #999;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
+    width: 100%;
   }
 
   .task__title_active {
@@ -148,18 +183,30 @@ export default {
   }
 
   .task__input {
-    border: 1px solid #ffdd66;
-    background: #fff;
-    padding: 0 10px;
+    border: 0px;
+    background: transparent;
+    padding: 0;
     height: 29px;
     border-radius: 3px;
     outline: none;
     width: 100%;
+    line-height: 30px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: inherit;
+    font-family: inherit;
+  }
+
+  .task__duration-block {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    margin: -5px;
   }
 
   .task__duration {
     white-space: nowrap;
-    margin-left: 20px;
+    margin: 5px;
     color: #999;
   }
 
@@ -167,10 +214,8 @@ export default {
     color: #222;
   }
 
-  .task__duration-limit {
-    white-space: nowrap;
+  .task__duration_limit {
     color: #00b894;
-    margin-left: 20px;
   }
 
   .task__duration-limit_red {
@@ -180,13 +225,12 @@ export default {
   .task__controls {
     display: flex;
     align-items: center;
-    margin-left: 30px;
+    margin-left: 10px;
   }
 
   @media screen and (max-width: 767px) {
     .task__controls {
       margin-left: auto;
-      margin-top: 10px;
     }
   }
 
@@ -195,6 +239,13 @@ export default {
     line-height: 1;
     cursor: pointer;
     margin-left: 20px;
+  }
+
+  @media screen and (max-width: 767px) {
+    .task__control {
+      font-size: 15px;
+      margin-left: 10px;
+    }
   }
 
   .task__control:hover {
