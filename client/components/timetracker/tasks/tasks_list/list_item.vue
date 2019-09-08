@@ -20,12 +20,12 @@
 
     <div class="task__duration-block">
       <div class="task__duration task__duration_limit"
-          v-if="formattedDurationLimit"
-          :class="{ 'task__duration-limit_red': isDurationMoreThanLimit }"
+           v-if="formattedDurationLimit"
+           :class="{ 'task__duration-limit_red': isDurationMoreThanLimit }"
       > {{ formattedDurationLimit }}
       </div>
       <div class="task__duration"
-          :class="{ 'task__duration_active': isStarted }"
+           :class="{ 'task__duration_active': isStarted }"
       > {{ formattedDuration }}
       </div>
     </div>

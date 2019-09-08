@@ -17,12 +17,13 @@ export default {
     });
   },
 
-  createTask: ({ commit }, {
+  createTask: ({ getters, commit }, {
     title = 'Таск без названия',
     isStarted = false,
     startDateTime = new Date(),
     duration = 0,
     durationLimit = undefined,
+    priority = getters.tasks.length + 1,
   }) => {
     const task = {
       _id: Random.id(),
@@ -31,6 +32,7 @@ export default {
       duration,
       isStarted,
       durationLimit,
+      priority,
     };
 
     commit(types.CREATE_TASK, task);

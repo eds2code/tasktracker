@@ -11,7 +11,7 @@ if (Meteor.isServer) {
 
 Meteor.methods({
   'tasks.create': ({
-    _id, title, isStarted, startDateTime, duration, durationLimit,
+    _id, title, isStarted, startDateTime, duration, durationLimit, priority,
   }) => {
     if (!Meteor.userId()) { throw new Meteor.Error('not-authorized'); }
 
@@ -21,6 +21,7 @@ Meteor.methods({
     check(startDateTime, String);
     check(duration, Number);
     check(durationLimit, Number);
+    check(priority, Number);
 
     Tasks.insert({
       _id,
@@ -32,6 +33,7 @@ Meteor.methods({
       createdAt: new Date().setHours(0, 0, 0, 0),
       userId: Meteor.userId(),
       username: Meteor.user().username,
+      priority: 1,
     });
   },
 
