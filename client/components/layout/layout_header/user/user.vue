@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="user">
     <UserStub v-if="isUserLoading" />
-    <template v-else-if="currentUser">
+    <template v-else-if="currentUser._id">
       {{ currentUser.profile.firstname || currentUser.username }}
       <UserMenu />
     </template>

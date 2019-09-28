@@ -10,7 +10,8 @@ export default {
     commit(types.INCREMENT_USER_REQUESTS_COUNTER);
 
     Tracker.autorun(() => {
-      const meteorUser = Meteor.users.findOne(state.currentUserId);
+      const userId = Meteor.userId();
+      const meteorUser = Meteor.users.findOne(userId);
       if (meteorUser) { commit(types.SET_CURRENT_USER, meteorUser); }
 
       commit(types.DECREMENT_USER_REQUESTS_COUNTER);

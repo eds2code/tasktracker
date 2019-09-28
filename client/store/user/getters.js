@@ -3,5 +3,4 @@ export default {
   currentError: state => state.currentError,
 
   currentUser: state => state.currentUser,
-  currentUserId: state => state.currentUserId,
 };

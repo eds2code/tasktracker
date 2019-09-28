@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <LayoutHeader />
-    <Timetracker />
+    <Yield />
     <Modals />
   </div>
 </template>
@@ -9,22 +9,31 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 
+import Yield from './components/layout/yield';
 import LayoutHeader from './components/layout/layout_header/layout_header';
 import Modals from './components/layout/modals/modals';
-import Timetracker from './pages/timetracker';
+
 
 export default {
-  components: { LayoutHeader, Timetracker, Modals },
+  components: { LayoutHeader, Yield, Modals },
 
   mounted() {
     this.initUser();
-    if (!this.currentUserId) { this.toggleModal('modals_signin'); }
+    this.checkUserAndGuardRoute();
+  },
+
+  watch: {
+    currentUser() {
+      this.checkUserAndGuardRoute();
+    },
+    '$route.name': function () {
+      this.checkUserAndGuardRoute();
+    },
   },
 
   computed: {
     ...mapGetters([
       'currentUser',
-      'currentUserId',
     ]),
   },
 
@@ -33,6 +42,13 @@ export default {
       'initUser',
       'toggleModal',
     ]),
+
+    checkUserAndGuardRoute() {
+      if (Meteor.userId()) return;
+      this.toggleModal('modals_signin');
+      if (this.$route.name === 'home') return;
+      this.$router.push({ name: 'home' });
+    },
   },
 };
 </script>

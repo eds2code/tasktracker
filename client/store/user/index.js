@@ -6,8 +6,7 @@ export default {
   state: {
     userRequestsCounter: 0,
     currentError: '',
-    currentUserId: Meteor.userId(),
-    currentUser: undefined,
+    currentUser: {},
   },
 
   actions,

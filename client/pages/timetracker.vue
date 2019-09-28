@@ -1,7 +1,5 @@
 <template>
-  <div class="container"
-       v-if="currentUser"
-  >
+  <div class="container">
     <div class="row">
       <div class="col-12">
         <div class="timetracker">
@@ -16,8 +14,6 @@
 <script>
 /* eslint-disable max-len  */
 
-import { mapGetters } from 'vuex';
-
 import Tasks from '../components/timetracker/tasks/tasks';
 import Report from '../components/timetracker/report/report';
 
@@ -25,16 +21,5 @@ export default {
   components: {
     Tasks, Report,
   },
-
-
-  computed: {
-    ...mapGetters([
-      'currentUser',
-    ]),
-  },
 };
 </script>
-
-<style scoped>
-
-</style>

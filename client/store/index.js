@@ -10,7 +10,7 @@ import getters from './getters';
 
 Vue.use(Vuex);
 
-export default () => new Vuex.Store({
+export default new Vuex.Store({
   state: {
     currentModalComponentName: '',
   },
