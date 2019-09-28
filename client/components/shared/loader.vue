@@ -2,11 +2,6 @@
   <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
 </template>
 
-<script>
-export default {
-}
-</script>
-
 <style lang="css" scoped>
 .lds-ellipsis {
   display: inline-block;

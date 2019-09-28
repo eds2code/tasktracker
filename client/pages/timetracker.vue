@@ -18,8 +18,8 @@
 
 import { mapGetters } from 'vuex';
 
-import Tasks from './tasks/tasks';
-import Report from './report/report';
+import Tasks from '../components/timetracker/tasks/tasks';
+import Report from '../components/timetracker/report/report';
 
 export default {
   components: {

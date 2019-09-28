@@ -7,7 +7,7 @@
 <script>
 import { mapGetters } from 'vuex';
 
-import Loader from '../../../loader';
+import Loader from '../../../shared/loader';
 
 export default {
   components: {

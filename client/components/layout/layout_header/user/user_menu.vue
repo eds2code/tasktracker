@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="buttons">    
+  <div class="buttons">
     <div class="button"
          @click="logout()"
     > Выйти </div>

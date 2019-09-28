@@ -1,9 +1,17 @@
 <template lang="html">
   <div>
+    <label for="inputFirstname">Имя:</label>
+    <input id="inputFirstname"
+           type="text"
+           name="firstname"
+           v-model="firstname"
+           @keyup.enter="setFocusOnInput('#inputUsername');"
+    >
+
     <label for="inputUsername">Логин:</label>
     <input id="inputUsername"
-           type="login"
-           placeholder="turbo9000"
+           type="text"
+           name="username"
            v-model="username"
            @keyup.enter="setFocusOnInput('#inputPassword');"
            required
@@ -12,21 +20,21 @@
     <label for="inputPassword">Пароль:</label>
     <input id="inputPassword"
            type="password"
-           placeholder="qwerty"
+           name="password"
            v-model="password"
            required
-           @keyup.enter="signIn()"
+           @keyup.enter="signUp()"
     >
 
     <Loader v-if="isUserLoading" />
-    <button v-else @click="signIn()">Войти</button>
+    <button v-else @click="signUp()"> Создать аккаунт </button>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
 
-import Loader from '../loader';
+import Loader from '../../shared/loader';
 
 export default {
   components: {
@@ -34,11 +42,12 @@ export default {
   },
 
   mounted() {
-    this.setFocusOnInput('#inputUsername');
+    this.setFocusOnInput('#inputFirstname');
   },
 
   data() {
     return {
+      firstname: '',
       username: '',
       password: '',
     };
@@ -52,13 +61,16 @@ export default {
 
   methods: {
     ...mapActions([
-      'login',
+      'createUser',
     ]),
 
-    signIn() {
-      this.login({
+    signUp() {
+      this.createUser({
         username: this.username,
         password: this.password,
+        profile: {
+          firstname: this.firstname,
+        },
       });
     },
 

@@ -10,8 +10,8 @@
 import { mapGetters, mapActions } from 'vuex';
 
 import LayoutHeader from './components/layout/layout_header/layout_header';
-import Timetracker from './components/timetracker/timetracker';
-import Modals from './components/modals/modals';
+import Modals from './components/layout/modals/modals';
+import Timetracker from './pages/timetracker';
 
 export default {
   components: { LayoutHeader, Timetracker, Modals },
