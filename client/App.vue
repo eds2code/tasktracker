@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <AppHeader />
+    <LayoutHeader />
     <Timetracker />
     <Modals />
   </div>
@@ -9,12 +9,12 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 
-import AppHeader from './components/app_header/app_header';
+import LayoutHeader from './components/layout/layout_header/layout_header';
 import Timetracker from './components/timetracker/timetracker';
 import Modals from './components/modals/modals';
 
 export default {
-  components: { AppHeader, Timetracker, Modals },
+  components: { LayoutHeader, Timetracker, Modals },
 
   mounted() {
     this.initUser();
