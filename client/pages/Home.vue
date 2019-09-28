@@ -7,8 +7,11 @@
                         :to="{ name: link.name }"
                         :key="link.name"
                         :class="`link link_${link.name}`"
+
           >
-            <div class="link__content">
+            <div class="link__content"
+                 @click="setLastClickedLink(link.name)"
+            >
               <div :class="`link__icon link__icon_${link.name}`"></div>
               {{ link.title }}
             </div>
@@ -30,13 +33,34 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   data() {
     return {
+      lastClickedLink: '',
       links: [
         { title: 'Тасктрекер', name: 'timetracker' },
       ],
     };
+  },
+
+  watch: {
+    'currentUser._id': function () {
+      this.$router.push({ name: this.lastClickedLink });
+    },
+  },
+
+  computed: {
+    ...mapGetters([
+      'currentUser',
+    ]),
+  },
+
+  methods: {
+    setLastClickedLink(name = '') {
+      this.lastClickedLink = name;
+    },
   },
 };
 </script>
