@@ -1,6 +1,6 @@
 import { RouterFactory, nativeScrollBehavior } from 'meteor/akryum:vue-router2';
-import Home from '../pages/Home.vue';
-import Timetracker from '../pages/Timetracker.vue';
+import Home from '../pages/Home';
+import Timetracker from '../pages/Timetracker';
 
 export default new RouterFactory({
   mode: 'history',
