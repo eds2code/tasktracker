@@ -15,4 +15,7 @@ export default {
   [types.DECREMENT_USER_REQUESTS_COUNTER]: (state) => {
     state.userRequestsCounter -= 1;
   },
+  [types.UPDATE_USER]: (state, user) => {
+    state.currentUser = user || state.currentUser || {};
+  },
 };

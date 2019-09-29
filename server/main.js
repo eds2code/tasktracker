@@ -1,1 +1,1 @@
-import '../imports/api/tasks.js';
+import '../controllers/task.js';

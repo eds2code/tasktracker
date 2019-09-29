@@ -6,7 +6,7 @@ import types from './mutations_types.js';
 import globalTypes from '../mutations_types.js';
 
 export default {
-  initUser: ({ state, commit }) => {
+  initUser: ({ commit }) => {
     commit(types.INCREMENT_USER_REQUESTS_COUNTER);
 
     Tracker.autorun(() => {
@@ -60,7 +60,6 @@ export default {
 
   logout: ({ commit }) => {
     commit(types.INCREMENT_USER_REQUESTS_COUNTER);
-
     Meteor.logout((err) => {
       if (err) {
         commit(types.SET_CURRENT_ERROR, err.reason);
@@ -68,7 +67,22 @@ export default {
         commit(types.SET_CURRENT_ERROR, '');
         commit(types.SET_CURRENT_USER);
       }
+      commit(types.DECREMENT_USER_REQUESTS_COUNTER);
+    });
+  },
 
+  updateUser: ({ state, commit }, user) => {
+    const updatedUser = { ...state.currentUser, ...user };
+    const backupUser = updatedUser;
+
+    commit(types.INCREMENT_USER_REQUESTS_COUNTER);
+    commit(types.UPDATE_USER, backupUser);
+
+    Meteor.call('user.update', updatedUser, (err) => {
+      if (err) {
+        window.console.log(err);
+        commit(types.UPDATE_USER, backupUser);
+      }
       commit(types.DECREMENT_USER_REQUESTS_COUNTER);
     });
   },

@@ -3,12 +3,14 @@
        @mouseover="isMenuVisible = true"
        @mouseleave="isMenuVisible = false"
   >
-    <div class="user__card-row">
+    <router-link :to="{ name: 'user' }"
+                 class="user__card-row"
+    >
       <div class="user__name">
         {{ currentUser.profile.firstname || currentUser.username }}
       </div>
       <div class="user__avatar"></div>
-    </div>
+    </router-link>
 
     <CardMenu v-show="isMenuVisible" />
   </div>
@@ -55,6 +57,17 @@ export default {
 .user__card-row {
   display: flex;
   align-items: center;
+  text-decoration: none;
+  transition: all .1s;
+}
+
+.user__card-row:active {
+  transition: all .1s;
+  transform: scale(.97);
+}
+
+.user__card-row:hover {
+  opacity: .5;
 }
 
 .user__card::before {
@@ -113,7 +126,7 @@ export default {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-  width: 100%;
+  width: 120px;
 }
 
 .user__card:hover .user__name {

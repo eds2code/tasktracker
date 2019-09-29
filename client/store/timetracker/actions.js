@@ -1,13 +1,13 @@
 /* eslint no-param-reassign: "error" */
 import { Random } from 'meteor/random';
-import Tasks from '../../../imports/api/tasks.js';
+import Tasks from '../../../controllers/task.js';
 
 import getHhMmSsFromTimestamp from '../../helpers/get_hhmmss_from_timestamp';
 import types from './mutations_types.js';
 
 export default {
   getTasks: ({ commit }) => {
-    Meteor.subscribe('tasks', () => {
+    Meteor.subscribe('task.all', () => {
       const currentUserTasks = Tasks
         .find({ userId: Meteor.userId() })
         .fetch();
@@ -37,7 +37,7 @@ export default {
 
     commit(types.CREATE_TASK, task);
 
-    Meteor.call('tasks.create', task, (err) => {
+    Meteor.call('task.create', task, (err) => {
       if (err) {
         window.console.log(err);
         commit(types.DELETE_TASK, task);
@@ -48,7 +48,7 @@ export default {
   deleteTask: ({ commit }, task) => {
     commit(types.DELETE_TASK, task);
 
-    Meteor.call('tasks.delete', task, (err) => {
+    Meteor.call('task.delete', task, (err) => {
       if (err) {
         window.console.log(err);
         commit(types.CREATE_TASK, task);
@@ -59,7 +59,7 @@ export default {
   updateTask: ({ commit }, task) => {
     commit(types.UPDATE_TASK, task);
 
-    Meteor.call('tasks.update', task, (err) => {
+    Meteor.call('task.update', task, (err) => {
       if (err) {
         window.console.log(err);
         commit(types.UPDATE_TASK, task);

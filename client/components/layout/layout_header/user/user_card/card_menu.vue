@@ -2,8 +2,14 @@
   <transition name="fade">
     <div class="card__menu">
       <div class="card__menu-inner">
-        <!-- <div class="button"> Настройки </div> -->
-        <div class="button" @click="logout()"> Выйти </div>
+        <router-link class="button"
+                     :to="{ name: 'user_settings' }"
+        > Настройки
+        </router-link>
+        <div class="button"
+             @click="logout()"
+        > Выйти
+        </div>
       </div>
     </div>
   </transition>
@@ -45,6 +51,7 @@ export default {
   }
 
   .button {
+    text-decoration: none;
     display: inline-block;
     color: #444;
     user-select: none;
