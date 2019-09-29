@@ -4,9 +4,8 @@
       <div class="row">
         <div class="col-12">
           <div class="app-header__inner">
-
+            <Logo />
             <User />
-
           </div>
         </div>
       </div>
@@ -18,10 +17,11 @@
 import { mapGetters, mapActions } from 'vuex';
 
 import User from './user/user';
+import Logo from '../../shared/logo';
 
 export default {
   components: {
-    User,
+    User, Logo,
   },
 
   methods: {
@@ -44,7 +44,6 @@ export default {
     z-index: 20;
     padding: 20px 0;
     margin-bottom: 20px;
-    border-bottom: 1px solid #eee;
   }
 
   .app-header__inner {

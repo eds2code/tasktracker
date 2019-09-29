@@ -1,10 +1,11 @@
 <template lang="html">
   <div class="user">
     <UserStub v-if="isUserLoading" />
+
     <template v-else-if="currentUser._id">
-      {{ currentUser.profile.firstname || currentUser.username }}
-      <UserMenu />
+      <UserCard />
     </template>
+
     <UserAuth v-else />
   </div>
 </template>
@@ -14,10 +15,10 @@ import { mapGetters } from 'vuex';
 
 import UserStub from './user_stub';
 import UserAuth from './user_auth';
-import UserMenu from './user_menu';
+import UserCard from './user_card/card';
 
 export default {
-  components: { UserStub, UserMenu, UserAuth },
+  components: { UserStub, UserCard, UserAuth },
 
   computed: {
     ...mapGetters([
