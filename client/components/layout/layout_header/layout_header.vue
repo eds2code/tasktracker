@@ -41,15 +41,16 @@ export default {
 <style scoped>
   .app-header {
     position: relative;
-    margin-bottom: 30px;
     z-index: 20;
+    padding: 20px 0;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
   }
 
   .app-header__inner {
     display: flex;
     align-items: center;
     font-size: 14px;
-    padding: 30px 0;
     width: 100%;
   }
 </style>

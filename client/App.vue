@@ -13,7 +13,6 @@ import Yield from './components/layout/yield';
 import LayoutHeader from './components/layout/layout_header/layout_header';
 import Modals from './components/layout/modals/modals';
 
-
 export default {
   components: { LayoutHeader, Yield, Modals },
 

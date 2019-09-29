@@ -126,7 +126,7 @@ export default {
   .controls {
     display: flex;
     align-items: flex-end;
-    padding: 20px 0px;
+    margin-bottom: 20px;
     border-radius: 10px;
     font-size: 14px;
     width: 100%;
