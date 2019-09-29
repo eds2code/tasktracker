@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 
 import user from './user';
 import timetracker from './timetracker';
+import moneytracker from './moneytracker';
 
 import actions from './actions';
 import mutations from './mutations';
@@ -22,5 +23,6 @@ export default new Vuex.Store({
   modules: {
     user,
     timetracker,
+    moneytracker,
   },
 });

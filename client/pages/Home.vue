@@ -23,9 +23,6 @@
           <div class="link link_stub">
             <div class="link__content">?</div>
           </div>
-          <div class="link link_stub">
-            <div class="link__content">?</div>
-          </div>
         </div>
       </div>
     </div>
@@ -41,6 +38,7 @@ export default {
       lastClickedLink: '',
       links: [
         { title: 'Тасктрекер', name: 'timetracker' },
+        { title: 'Бюджет', name: 'moneytracker' },
       ],
     };
   },
@@ -125,6 +123,9 @@ export default {
 }
 .link__icon_timetracker::after {
   content: '⏰';
+}
+.link__icon_moneytracker::after {
+  content: '💸';
 }
 
 .link_stub {
