@@ -86,4 +86,13 @@ export default {
       commit(types.DECREMENT_USER_REQUESTS_COUNTER);
     });
   },
+
+  changeUserPassword: ({ commit }, { currentPw, newPw }) => {
+    commit(types.INCREMENT_USER_REQUESTS_COUNTER);
+
+    Accounts.changePassword(currentPw, newPw, (err) => {
+      if (err) { window.console.log(err); }
+      commit(types.DECREMENT_USER_REQUESTS_COUNTER);
+    });
+  },
 };
