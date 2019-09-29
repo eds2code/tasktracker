@@ -15,5 +15,7 @@ export default new RouterFactory({
     { name: 'moneytracker', path: '/moneytracker', component: Moneytracker },
 
     ...userRoutes,
+
+    { path: '*', redirect: '/' },
   ],
 }).create();
