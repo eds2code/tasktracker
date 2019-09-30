@@ -9,7 +9,7 @@
           <div class="app-card__emoji">{{ app.emoji || '👾' }}</div>
           <div class="app-card__title">{{ app.title }}</div>
           <div class="app-card__descript"
-              v-if="app.descript"
+               v-if="app.descript"
           > {{ app.descript }}
           </div>
         </template>
