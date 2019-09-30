@@ -13,7 +13,11 @@
                  @click="setLastClickedLink(link.name)"
             >
               <div :class="`link__icon link__icon_${link.name}`"></div>
-              {{ link.title }}
+              <div class="link__title">{{ link.title }}</div>
+              <div class="link__descript"
+                   v-if="link.descript"
+              > {{ link.descript }}
+              </div>
             </div>
           </router-link>
 
@@ -37,8 +41,8 @@ export default {
     return {
       lastClickedLink: '',
       links: [
-        { title: 'Тасктрекер', name: 'timetracker' },
-        { title: 'Бюджет', name: 'moneytracker' },
+        { title: 'Daily план', name: 'timetracker', descript: 'Составляй список задач на день, засекай время, создавай отчет.' },
+        { title: 'Копилка', name: 'moneytracker', descript: 'Планируй бюджет, веди учет расходов, копи деньги.' },
       ],
     };
   },
@@ -83,10 +87,6 @@ export default {
   background: #ffdd66;
   overflow: hidden;
   border-radius: 10px;
-  text-decoration: none;
-  color: #444;
-  font-weight: bold;
-  font-size: 24px;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
 }
 .link:after {
@@ -113,21 +113,38 @@ export default {
   bottom: 0;
   width: 100%;
   height: 100%;
+  padding: 40px;
 }
 
 .link__icon {
-  font-size: 48px;
-  height: 48px;
-  width: 48px;
+  font-size: 80px;
+  height: 80px;
+  width: 80px;
   margin-bottom: 20px;
 }
 .link__icon_timetracker::after {
-  content: '⏰';
+  content: '⏱️';
 }
 .link__icon_moneytracker::after {
   content: '💸';
 }
+.link__title {
+  text-decoration: none;
+  color: #444;
+  font-weight: bold;
+  font-size: 24px;
+}
+.link__descript {
+  text-decoration: none;
+  color: #666;
+  font-size: 12px;
+  line-height: 18px;
+  margin-top: 15px;
+  letter-spacing: .1px;
+  text-align: center;
+}
 
+/*  */
 .link_stub {
   background: #fff;
   box-shadow: none;
