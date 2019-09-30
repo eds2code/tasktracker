@@ -18,7 +18,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import AppCard from './Home/app_card.vue';
+import AppCard from '../components/home/app_card.vue';
 
 export default {
   components: { AppCard },
